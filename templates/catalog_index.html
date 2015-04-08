@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+
+	<div class="alert alert-info" role="alert">
+	{% for message in messages %}
+	  <p>
+	  	<strong>* {{message}}</strong>
+	  </p>
+	{% endfor %}
+	</div>
+	{% endif %}
+	{% endwith %}
+	<div class="row">
+		<div class="col-md-12">
+			{% if 'person_id' in session %}
+			<a class="glyphicon glyphicon-plus" href="/catalog/{{catalog.id}}/item/create">Add</a>
+			&nbsp;
+			{% endif %}
+			<a href="/">Back</a>
+			<table class="table table-hover">
+				<tr>
+					<td>
+						<h2>
+							# (<b>{{ catalog.name }}</b>) Items
+							<h6>created at {{ catalog.created_at }}</h6>
+						</h2>
+					</td>
+				</tr>
+				{% if items.count() %}
+					{% for i in items %}
+						<tr>
+							<td class="text-center">
+								<h3><a href="/catalog/{{ catalog.id }}/item/{{ i.id }}">{{ i.name }}</a></h3>
+								{% if 'person_id' in session %}
+								<div class="text-left">
+									<a class='drop-confirmation' href='/catalog/{{ catalog.id }}/item/{{ i.id }}/drop'>Delete</a>&nbsp;|&nbsp;
+									<a href='/catalog/{{ catalog.id }}/item/{{ i.id }}/edit'>Edit</a>
+								</div>
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+				{%else%}
+					<tr>
+						<td class="text-center">
+							<br/>
+							<br/>
+							<h3>No Items here</h3>
+						</td>
+					</tr>
+				{% endif %}
+			</table>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$(".drop-confirmation").click(function(){
+		return confirm("Are sure that you want to delete this item?");
+	});
+});
+</script>
+{% endblock %}

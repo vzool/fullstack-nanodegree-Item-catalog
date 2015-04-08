@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		{% if 'person_id' in session %}
+		<div class="col-md-7">
+
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+
+			<div class="alert alert-danger" role="alert">
+			{% for message in messages %}
+			  <p>
+			  	<strong>* {{message}}</strong>
+			  </p>
+			{% endfor %}
+			</div>
+			{% endif %}
+			{% endwith %}
+
+			
+			{% if catalog: %}
+			<form class="form-signin" action="{{url_for('createCatalogAction', id=catalog.id)}}" method="POST">
+			{% else %}
+			<form class="form-signin" action="{{url_for('createCatalogAction')}}" method="POST">
+			{% endif %}
+				<h2 class="form-signin-heading"><a class="btn btn-primary" href="/">&lt; Back</a>
+					{% if catalog: %}
+					Update your stuff here?
+					{% else %}
+					Great, What is your Catalog?
+					{% endif %}
+				</h2>
+				
+				<label for="inputName" class="sr-only">Catalog Name</label>
+
+				{% if catalog: %}
+				<input name="name" type="name" id="inputName" class="form-control" value="{{ catalog.name }}" placeholder="Catalog Name" required="" autofocus="">
+				{% else %}
+				<input name="name" type="name" id="inputName" class="form-control" placeholder="Catalog Name" required="" autofocus="">
+				{% endif %}
+
+				<br/>
+
+				{% if catalog: %}
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+				{% else %}
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+				{% endif %}
+
+			</form>
+		</div>
+		{% else %}
+		<div class="col-md-8">
+			<h1>We sorry, register first then make yours.</h1>
+			<a class="btn btn-lg btn-primary" href="/">&lt; Back</a>&nbsp;<a class="btn btn-lg btn-success" href="{{url_for('signupAction')}}">Become a Memeber</a>
+		</div>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

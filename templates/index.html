@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+
+		<div class="alert alert-info" role="alert">
+		{% for message in messages %}
+		  <p>
+		  	<strong>* {{message}}</strong>
+		  </p>
+		{% endfor %}
+		</div>
+		{% endif %}
+		{% endwith %}
+		
+		{% if catalog != None %}
+		<div class="col-md-6">
+			<table class="table table-hover">
+				<tr class='text-center'>
+					<th class='text-center'>
+						<h3>Your Catalog</h3>
+					</th>
+				</tr>
+
+				{% if catalog.count() %}
+					{% for c in catalog %}
+						<tr>
+							<td>
+								<h3 class='text-center'>
+									<a href='/catalog/{{ c.id }}/items'>{{ c.name }}</a>
+									<h5><small>by {{ c.person.name }}</small></h5>
+								</h3>
+								<span>
+									<a class='drop-confirmation' href='/catalog/{{ c.id }}/drop'>Delete</a>&nbsp;|&nbsp;
+									<a href='/catalog/{{ c.id }}/edit'>Edit</a>
+								</span>
+							</td>
+						</tr>
+					{% endfor %}
+				{% else %}
+					<tr>
+						<td class='text-center'>No Data</td>
+					</tr>
+				{% endif %}
+			</table>
+		</div>
+		{% endif %}
+
+		{% if catalog == None %}
+		<div class="col-md-12">
+		{% else %}
+		<div class="col-md-6">
+		{% endif %}
+			<table class="table table-hover">
+					<th class='text-center'>
+						<h3>Last 10 Added recently by Community</h3>
+					</th>
+				</tr>
+			
+			{% if last_catalog == None %}
+				<th class='text-center'>
+					<h1>We fresh, still not have Community yet.</h1>
+					<a class="btn btn-lg btn-success" href="{{url_for('signupAction')}}">Become First one</a>
+				</th>				
+			{% else %}
+				{% if last_catalog.count() %}
+
+					{% for c in last_catalog %}
+						<tr>
+							<td>
+								<h3 class='text-center'>
+									<a href='/catalog/{{ c.id }}/items'>{{ c.name }}</a>
+									<h5><small>by {{ c.person.name }}</small></h5>
+								</h3>
+							</td>
+						</tr>
+					{% endfor %}
+				{% else %}
+					<tr>
+						<td class='text-center'>No Community Data</td>
+					</tr>
+				{% endif %}
+
+				{% if catalog == None %}
+					<tr>
+						<td class='text-center'>
+							<h1>
+								<a href="{{url_for('signupAction')}}">Join us and Make your Catalog</a>
+							</h1>
+						</td>
+					</tr>
+				{% endif%}
+				
+			{% endif%}
+			</table>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$(".drop-confirmation").click(function(){
+		return confirm("Are sure that you want to delete this catalog?");
+	});
+});
+</script>
+{% endblock %}

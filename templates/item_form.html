@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+
+			<div class="alert alert-danger" role="alert">
+			{% for message in messages %}
+			  <p>
+			  	<strong>* {{message}}</strong>
+			  </p>
+			{% endfor %}
+			</div>
+			{% endif %}
+			{% endwith %}
+
+			{% if item %}
+			<form class="form-item" action="/catalog/{{catalog.id}}/item/{{item.id}}/edit" method="POST">
+			{% else %}
+			<form class="form-item" action="/catalog/{{catalog.id}}/item/create" method="POST">
+			{% endif %}
+				<h2 class="form-signin-heading"><a class="btn btn-primary" href="/catalog/{{catalog.id}}/items">&lt; Back</a> Please add your item in (<b>{{catalog.name}}</b>) here</h2>
+				
+				{% if item %}
+				<label for="inputName" class="sr-only">Item Name</label>
+				<input name="name" value="{{item.name}}" type="name" id="inputName" class="form-control" placeholder="Item Name" required="" autofocus="">
+
+				<label for="inputDescription" class="sr-only">Description</label>
+				<textarea id="inputDescription" name='description' placeholder="Description" class="form-control" rows="5">{{item.description}}</textarea>
+				{% else %}
+				<label for="inputName" class="sr-only">Item Name</label>
+				<input name="name" type="name" id="inputName" class="form-control" placeholder="Item Name" required="" autofocus="">
+
+				<label for="inputDescription" class="sr-only">Description</label>
+				<textarea id="inputDescription" name='description' placeholder="Description" class="form-control" rows="5"></textarea>
+				{% endif %}
+
+				<br/>
+
+				{% if item %}
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+				{% else %}
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
+				{% endif %}
+
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
