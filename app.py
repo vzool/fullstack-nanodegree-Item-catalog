@@ -188,9 +188,10 @@ def logoutAction():
 @app.route('/catalog/<int:id>/edit', methods=['POST', 'GET'])
 @app.route('/catalog/create', methods=['POST', 'GET'])
 def createCatalogAction(id = None):
-	
-	if '.ico' in request.path:
-		print("ICON ICON")
+
+	# if person is not logged in, redirect to home
+	# if 'person_id' not in session:
+	# 	return redirect(url_for('index'))
 
 	if request.method == 'POST':
 		
