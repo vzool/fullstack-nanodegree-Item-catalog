@@ -43,6 +43,8 @@
 
 				<br/>
 
+				<input type="hidden" name="token" value="{{ state }}">
+
 				{% if catalog: %}
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
 				{% else %}
@@ -54,7 +56,7 @@
 		{% else %}
 		<div class="col-md-8">
 			<h1>We sorry, register first then make yours.</h1>
-			<a class="btn btn-lg btn-primary" href="/">&lt; Back</a>&nbsp;<a class="btn btn-lg btn-success" href="{{url_for('signupAction')}}">Become a Memeber</a>
+			<a class="btn btn-lg btn-primary" href="/">&lt; Back</a>&nbsp;<a class="btn btn-lg btn-success" href="{{url_for('showLogin')}}">Become a Memeber</a>
 		</div>
 		{% endif %}
 	</div>

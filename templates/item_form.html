@@ -38,6 +38,8 @@
 				<textarea id="inputDescription" name='description' placeholder="Description" class="form-control" rows="5"></textarea>
 				{% endif %}
 
+				<input type="hidden" name="token" value="{{ state }}">
+				
 				<br/>
 
 				{% if item %}

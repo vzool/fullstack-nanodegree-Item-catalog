@@ -37,7 +37,7 @@
 								<h3><a href="/catalog/{{ catalog.id }}/item/{{ i.id }}">{{ i.name }}</a></h3>
 								{% if 'person_id' in session %}
 								<div class="text-left">
-									<a class='drop-confirmation' href='/catalog/{{ catalog.id }}/item/{{ i.id }}/drop'>Delete</a>&nbsp;|&nbsp;
+									<a class='drop-confirmation' href='/catalog/{{ catalog.id }}/item/{{ i.id }}/drop?token={{state}}'>Delete</a>&nbsp;|&nbsp;
 									<a href='/catalog/{{ catalog.id }}/item/{{ i.id }}/edit'>Edit</a>
 								</div>
 								{% endif %}

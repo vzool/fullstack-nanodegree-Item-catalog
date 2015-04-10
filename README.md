@@ -30,6 +30,7 @@ CREATE TABLE person (
 	PRIMARY KEY (id)
 )
 
+
 -- Catalog table
 
 CREATE TABLE catalog (
@@ -77,6 +78,20 @@ $ python app.py
 
 Then application server will run on port 5000.
 
+
+### Server side(Vagrant option)
+To avoid wrong configuration you can test this system as a Virtual Machine(VM), and I will tell you how in Debian Linux like:
+
+First, install those packages:
+```
+$ sudo apt-get install virtualbox vagrant
+```
+Finally fire up vm
+```
+$ vagrant up --provider virtualbox
+```
+It will take some time to download ubuntu
+
 ### Client side
 
 Open your browser with this URL:
@@ -94,7 +109,9 @@ You will need a Python 2.x language installed in your server system with some li
 - python-sqlalchemy
 - python-flask
 - python-requests
-- python-httplib2
+- Flask-Login
+- oauth2client
+- requests
 
 ### Client side
 
@@ -110,5 +127,4 @@ To run this Web Application you will need a browser which should be in specific 
 
 It's Completely Free. But, Do whatever you like to do on your own full responsibility;
 
-This licence is known with [MIT License](http://vzool.mit-license.org/) in professional networks.# fullstack-nanodegree-item-catalog
-# fullstack-nanodegree-item-catalog
+This licence is known with [MIT License](http://vzool.mit-license.org/) in professional networks.

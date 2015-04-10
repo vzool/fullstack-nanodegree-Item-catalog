@@ -35,7 +35,7 @@
 									<h5><small>by {{ c.person.name }}</small></h5>
 								</h3>
 								<span>
-									<a class='drop-confirmation' href='/catalog/{{ c.id }}/drop'>Delete</a>&nbsp;|&nbsp;
+									<a class='drop-confirmation' href='/catalog/{{ c.id }}/drop?token={{state}}'>Delete</a>&nbsp;|&nbsp;
 									<a href='/catalog/{{ c.id }}/edit'>Edit</a>
 								</span>
 							</td>
@@ -64,7 +64,7 @@
 			{% if last_catalog == None %}
 				<th class='text-center'>
 					<h1>We fresh, still not have Community yet.</h1>
-					<a class="btn btn-lg btn-success" href="{{url_for('signupAction')}}">Become First one</a>
+					<a class="btn btn-lg btn-success" href="{{url_for('showLogin')}}">Become First one</a>
 				</th>				
 			{% else %}
 				{% if last_catalog.count() %}
@@ -89,7 +89,7 @@
 					<tr>
 						<td class='text-center'>
 							<h1>
-								<a href="{{url_for('signupAction')}}">Join us and Make your Catalog</a>
+								<a href="{{url_for('showLogin')}}">Join us and Make your Catalog</a>
 							</h1>
 						</td>
 					</tr>
