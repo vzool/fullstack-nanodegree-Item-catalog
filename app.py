@@ -1,8 +1,6 @@
-import requests, os
+import requests
 import random, string
 import httplib2, json
-
-from werkzeug.routing import BaseConverter
 
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
