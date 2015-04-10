@@ -1,12 +1,14 @@
-import requests
+import requests, os
 import random, string
 import httplib2, json
+
+from werkzeug.routing import BaseConverter
 
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 
 from flask import make_response
-from flask import Flask, render_template, request, redirect, jsonify, url_for, session, flash
+from flask import Flask, render_template, request, redirect, jsonify, url_for, session, flash, send_from_directory
 
 app = Flask(__name__)
 
@@ -55,15 +57,13 @@ def showLogin():
 	# if user already sign in redirect to home
 	if 'person_id' in session:
 		return redirect('/')
-
-	# generate random state to protect system from anti-forgery state token
 	state = token()
-	session['state'] = state
+	# generate random state to protect system from anti-forgery state token
 	return render_template("login.html", STATE = state)
 
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
-	# Check validate state token 
+	# Check validate state token
 	if request.args.get('state') != session['state']:
 		response = make_response(json.dumps('Invalid state parameter.'), 401)
 		response.headers['Content-Type'] = 'application/json'
@@ -189,6 +189,9 @@ def logoutAction():
 @app.route('/catalog/create', methods=['POST', 'GET'])
 def createCatalogAction(id = None):
 	
+	if '.ico' in request.path:
+		print("ICON ICON")
+
 	if request.method == 'POST':
 		
 		# check if it is create
