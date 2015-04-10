@@ -86,11 +86,26 @@ First, install those packages:
 ```
 $ sudo apt-get install virtualbox vagrant
 ```
-Finally fire up vm
+Then fire up VM
 ```
 $ vagrant up --provider virtualbox
 ```
-It will take some time to download ubuntu
+It will take some time to download ubuntu.
+
+Finally, login to your VM and run the app:
+```
+$ # you should be inside the home folder of the app
+$ vagrant ssh
+$
+$ # Then go to home directory app inside VM:
+$ cd /vargant
+$
+$ # Create database
+$ python database_setup.py
+$
+$ # Finally run application
+$ python app.py
+```
 
 ### Client side
 
