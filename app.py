@@ -188,8 +188,8 @@ def logoutAction():
 def createCatalogAction(id = None):
 
 	# if person is not logged in, redirect to home
-	# if 'person_id' not in session:
-	# 	return redirect(url_for('index'))
+	if 'person_id' not in session:
+		return redirect(url_for('index'))
 
 	if request.method == 'POST':
 		
@@ -270,6 +270,10 @@ def dropCatalogAction(id = None):
 		flash("Error in Token, try again")
 		return redirect(url_for('index'))	
 
+	# if person is not logged in, redirect to home
+	if 'person_id' not in session:
+		return redirect(url_for('index'))
+		
 	if id != None:
 		# delete all items from catalog
 		db.query(CatalogItem).filter(CatalogItem.catalog_id == id).delete()
